@@ -29,3 +29,29 @@ Pipeline that is created :
   // Only Video
 	// "filesrc location=\"%s\" ! qtdemux name=d "		
 	// "d.video_0  ! decodebin ! x264enc ! rtph264pay pt=96 name=pay0 )", argv[1]);
+
+3. To start only mp4 file format support is analyzed and implemented.
+
+Issues faced :
+1. Visual studio setup GTsreamer library : new to Visual studio, so it took me some time to set up the environment for Gstreamer library usage.
+    Some links followed :
+        Linking the gstreamer libraries :
+	https://stackoverflow.com/questions/21265582/gstreamer-c-on-visual-studio-2010/50756228
+		(1) C/C++ -> Additional Include Directories -> define your include paths such as
+		C:\gstreamer\1.0\x86\lib\glib-2.0\include;C:\gstreamer\1.0\x86\include\gstreamer-1.0;C:\gstreamer\1.0\x86\include\glib-			2.0\;C:\gstreamer\1.0\x86\include\glib-2.0\glib;%(AdditionalIncludeDirectories)
+
+		(2) Linker -> General -> Adding Library Directories -> write your lib directory path such as
+		C:\gstreamer\1.0\x86\lib;%(AdditionalLibraryDirectories)
+
+		(3) Linker -> Input -> Additional Dependencies -> Write your .lib files you want to use such as
+		gstrtspserver-1.0.lib;gobject-2.0.lib;glib-2.0.lib;gstreamer-1.0.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)
+
+Issue faced for gstrptserver is because of not including this .dll
+Path : C:\gstreamer\1.0\x86\lib
+dll --> gstrtspserver-1.0.lib
+
+
+Plans :
+1. To read multiple video files and stream it as a queue
+2. GUI for user inputs and configuration
+3. multiple video format support
